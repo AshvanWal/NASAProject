@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const api_call1 = require('./public/api_call_1.js');
+// const api_call2 = require('./public/api_call_2.js');
 const  port = process.env.PORT || 8080;
 
 var app = express();
@@ -32,6 +33,7 @@ app.post('/weather', urlencodedParser, async (request, response) => {
         response.render('page1.hbs', {
             output: weatherOut.main
         });
+
     }catch (e) {
         response.render('page1.hbs', {
             output: e
@@ -39,6 +41,23 @@ app.post('/weather', urlencodedParser, async (request, response) => {
     }
 
 });
+//
+// app.get('/image', urlencodedParser, async (request, response) => {
+//     // console.log(request.body.country_input);
+//     try {
+//         let image = await api_call1.get_image(request.output);
+//         // console.log(weatherOut);
+//         response.render('page2.hbs', {
+//             output: image.main
+//         });
+//
+//     }catch (e) {
+//         response.render('page2.hbs', {
+//             output: e
+//         });
+//     }
+//
+// });
 
 
 // app.get('/page1', (request, response))
