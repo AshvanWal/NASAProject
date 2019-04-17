@@ -3,7 +3,7 @@ const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const api_call1 = require('./public/api_call_1.js');
 // const api_call2 = require('./public/api_call_2.js');
-const  port = process.env.PORT || 8080;
+const  port = process.env.PORT || 3000;
 
 var app = express();
 var urlencodedParser = bodyParser.urlencoded({extended: false});
@@ -25,13 +25,16 @@ app.get('/', (request, response) => {
     });
 });
 
-app.post('/weather', urlencodedParser, async (request, response) => {
+app.post('/picture', urlencodedParser, async (request, response) => {
     // console.log(request.body.country_input);
     try {
-        let weatherOut = await api_call1.get_weather(request.body.country_input);
-        // console.log(weatherOut);
+        let imageOut = await api_call1.get_image(request.body.keyword_input);
+        // console.log(imageOut);
         response.render('page1.hbs', {
-            output: weatherOut.main
+            output: imageOut[0],
+            output2: imageOut[1],
+            output3: imageOut[2],
+            output4: imageOut[3]
         });
 
     }catch (e) {
@@ -41,26 +44,20 @@ app.post('/weather', urlencodedParser, async (request, response) => {
     }
 
 });
-//
-// app.get('/image', urlencodedParser, async (request, response) => {
-//     // console.log(request.body.country_input);
-//     try {
-//         let image = await api_call1.get_image(request.output);
-//         // console.log(weatherOut);
-//         response.render('page2.hbs', {
-//             output: image.main
-//         });
-//
-//     }catch (e) {
-//         response.render('page2.hbs', {
-//             output: e
-//         });
-//     }
-//
-// });
 
 
-// app.get('/page1', (request, response))
+app.get('/cards', (request, response) => {
+    response.render('form2.hbs', {
+        title: 'Welcome Page',
+        page1: ["/page1" , "/page2"]
+    });
+});
+
+
+
+
+
+
 
 app.listen(port, () => {
     console.log(`Server is up on port ${port}`);
