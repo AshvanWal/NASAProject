@@ -53,6 +53,26 @@ app.get('/cards', (request, response) => {
     });
 });
 
+// app.post('/cards/deck', urlencodedParser, async (request, response) => {
+//     // console.log(request.body.country_input);
+//     try {
+//         let imageOut = await api_call1.get_image(request.body.keyword_input);
+//         // console.log(imageOut);
+//         response.render('page2.hbs', {
+//             output: imageOut[0],
+//             output2: imageOut[1],
+//             output3: imageOut[2],
+//             output4: imageOut[3]
+//         });
+//
+//     }catch (e) {
+//         response.render('page1.hbs', {
+//             output: e
+//         });
+//     }
+//
+// });
+//
 
 
 
